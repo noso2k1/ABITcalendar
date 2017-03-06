@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.2/css/bulma.min.css">
+  </head>
+  <body>
+    <div class="box">
+
+      <label class="label">Mese:</label>
+      <p class="control">
+        <span class="select">
+          <select id="mese">
+            <option value="1">Gennaio</option>
+            <option value="2">Febbraio</option>
+            <option value="3">Marzo</option>
+            <option value="4">Aprile</option>
+            <option value="5">Maggio</option>
+            <option value="6">Giugno</option>
+            <option value="7">Luglio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Settembre</option>
+            <option value="10">Ottobre</option>
+            <option value="11">Novembre</option>
+            <option value="12">Dicembre</option>
+          </select>
+        </span>
+      </p>
+      <label class="label">Anno:</label>
+      <p class="control">
+        <span class="select">
+          <select id="anno">
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+          </select>
+        </span>
+      </p>
+      
+      <p class="control">
+        <button class="button" id="genera">Crea nuovo foglio</button>
+      </p>
+ 
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+  <script>
+    $(function() {
+      $('#genera').click(genera);
+      var oggi = new Date();
+      var meseDef = oggi.getMonth()+1;  //Gennaio è 0
+      var annoDef = oggi.getFullYear();
+      if(meseDef == 12){
+        meseDef = 1;
+        annoDef = annoDef + 1;
+      }else{
+        meseDef = meseDef + 1;
+      }
+      
+      $('#mese').val(meseDef);  //Mese corrente + 1 (gennaio è "0")
+      $('#anno').val(annoDef);
+    });
+    
+    function genera(mese, anno) {
+      var mese = $('#mese').val();
+      var anno = $('#anno').val();
+      google.script.run.creaFoglio(mese, anno);
+    }
+  </script>
+</html>
+
+
